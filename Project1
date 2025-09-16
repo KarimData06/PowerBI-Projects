@@ -1,0 +1,114 @@
+📊 Tableau de bord des ventes Power BI
+Ce projet montre comment créer un tableau de bord Power BI complet pour analyser les données de vente d’une entreprise de produits électriques.
+Il couvre la préparation des données, la modélisation, la visualisation et des fonctionnalités avancées telles que les infobulles, les signets, les rôles de sécurité et une vue adaptée aux mobiles.
+
+🚀 Escalier
+1. Lancez Power BI et chargez les données
+Ouvrir Power BI Desktop
+Importer le fichier dans Power Querysales_2.csv
+Vérifiez les types et la qualité des données à l’aide des outils intégrés :
+Qualité de la colonne
+Distribution des colonnes
+Profil de colonne
+Assurez-vous que les types de données corrects sont appliqués
+Renommez les colonnes avec des libellés explicites :
+Chronique originale	Nouveau nom
+OrderID	ID de commande
+ID client	Identifiant du client
+Nom de l’entreprise	Nom du client
+Productid	ID du produit
+Nom du produit	Nom du produit
+Catégorie	Catégorie de produit
+RegionID	ID de région
+RegionName	Nom de la région
+Date de commande	Date de la commande
+Quantité	Quantité
+Prix unitaire	Prix unitaire
+TotalPrice	Prix total
+OrderStatus	Statut de la commande
+2. Normalisation des données
+Créez des tables de référence :
+Clients (ID client, Nom du client)
+Produits (ID du produit, nom du produit, catégorie de produit)
+Régions (ID de région, Nom de la région)
+Supprimez les doublons, triez par ID et vérifiez les anomalies
+Créer une table de faits de vente à partir du jeu de données brut
+Charger uniquement les clients, les produits, les régions, les ventes dans le modèle
+3. Modèle de données
+Dans la vue Modèle, vérifiez les relations générées automatiquement
+Exemple : Clients commerciaux ↔ (ID client)
+Valider les relations (par exemple, l’ID de commande avec le nom du produit)
+Supprimer et recréer une relation manuellement pour tester
+4. Création d’un tableau de bord
+🎨 Thème et mise en page
+Importer un thème personnalisé (par exemple, Loomy Lime Theme)
+Paramètres de la page :
+Hauteur : 2000 px
+Arrière-plan: #1E2D38
+Tuiles: #232448
+Organisez les visuels à l’aide d’une mise en page prédéfinie
+📐 Mesures DAX
+Total Sales = SUM(Sales[Total Price])
+Order Count = DISTINCTCOUNT(Sales[Order Id])
+Quantity Sold = SUM(Sales[Quantity])
+Average Order Value = DIVIDE([Total Sales], [Order Count])
+📊 Visuels – Page 1 (Aperçu des ventes)
+KPI : Ventes totales, nombre de commandes, quantité vendue, valeur moyenne des commandes
+Graphique linéaire/en aires : Ventes et quantité au fil du temps
+Bar chart: Sales by Region
+Donut chart: Sales by Product Category
+Table: Detailed orders (Order Id, Customer, Product, etc.)
+🎚 Filters
+Date range
+Order status
+Region
+5. Second Page – Cancelled Orders
+📐 New Measures
+Cancelled Orders =
+CALCULATE(COUNT(Sales[Order Id]), Sales[Order Status] = "Cancelled")
+
+Cancelled Sales =
+CALCULATE(SUM(Sales[Total Price]), Sales[Order Status] = "Cancelled")
+
+Cancelled % =
+DIVIDE([Cancelled Orders], [Order Count])
+📊 Visuals
+KPIs: Cancelled Orders, Cancelled Sales, Cancelled %
+Line chart: Cancelled % over time
+Column chart: Cancelled Orders by Region
+Treemap: Cancelled Sales by Product/Category
+Ribbon chart: Cancelled Orders by Product per quarter
+6. Navigation Menu
+Add custom icons to the left panel
+Link each icon to report pages
+7. Tooltips
+Region Histogram: show sales evolution (line chart)
+Category Donut: show product evolution (ribbon chart)
+8. Advanced Features
+Data availability %: with PayPal KPI Donut Chart
+Bookmarks:
+Mobile products (Smartphone, Headphone, SmartWatch)
+Office products (Tablet, Monitor, Laptop, Keyboard, Mouse)
+Reset filters
+Row-Level Security (RLS):
+Role 1 → only “AI Systems” & “TechCorp”
+Role 2 → only “South” region
+Mobile layout: adapt Sales Overview for mobile
+9. Publish
+Save file.pbix
+Publish to Power BI Service for sharing
+📷 Captures d’écran (exemple)
+Ajoutez les captures d’écran de votre rapport Power BI ici
+
+Page d’aperçu des ventes
+Page Commandes annulées
+Navigation Menu
+✅ Résultat final
+Vous disposez désormais d’un tableau de bord Power BI entièrement fonctionnel avec les éléments suivants :
+
+Modèle de données propre et normalisé
+Plusieurs pages d’analyse
+KPI, graphiques, filtres, infobulles
+Menu de navigation et signets
+Rôles de sécurité
+Version adaptée aux mobiles
